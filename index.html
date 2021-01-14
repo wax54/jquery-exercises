@@ -100,6 +100,21 @@
         .appendTo('aside');
       console.log('Paragraph Added');
 
+      $('.col-sm-4').on('change', 'input', function () {
+        const inputs = $('.mb-5 .form-control');
+        const r = inputs.eq(0).val();
+        const b = inputs.eq(1).val();
+        const g = inputs.eq(2).val();
+        $('body').css('background-color', `rgb(${r},${g},${b})`);
+      });
+      console.log('added event listeners');
+
+
+      $('img').click(function () {
+        $(this).remove();
+      });
+      console.log('added a listener to remove the image from the DOM')
+
     });
 </script>
 </body>
