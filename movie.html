@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App!</title>
+</head>
+
+<body>
+    <form id="user-input">
+        <label for="title">Title:</label>
+        <input id="title" type="text" value="Raiders of the Lost Ark">
+
+        <label for="rating">Rating:</label>
+        <input id="rating" type="number" min="0" max="10" value="5">
+        <input type="submit">
+    </form>
+
+    <ul id="movie-list"></ul>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="movie.js"></script>
+</body>
+
+</html>
