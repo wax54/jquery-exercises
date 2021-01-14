@@ -74,7 +74,25 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
-  // Add your code here!
+    jQuery(function () {
+      console.log("let's get ready to party with jQuery!");
+
+      $('article img').addClass('image-center');
+      console.log('images class changed');
+
+      $('article p').last().remove();
+      console.log('paragraph removed');
+
+      const biggestPixel = 100;
+      const randNum = Math.floor(Math.random() * (biggestPixel + 1));
+      const randSizePx = randNum + 'px';
+      $('#title').css('font-size', randSizePx);
+      console.log('Title Size Changed');
+
+      const list = $('aside ol');
+      list.append("<li>I'm Number 5!</li>");
+
+    });
 </script>
 </body>
 
