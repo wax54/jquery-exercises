@@ -89,8 +89,16 @@
       $('#title').css('font-size', randSizePx);
       console.log('Title Size Changed');
 
-      const list = $('aside ol');
-      list.append("<li>I'm Number 5!</li>");
+      $('aside ol').append("<li>I'm Number 5!</li>");
+      console.log('List Appended');
+
+      $('aside').children().remove();
+      console.log('LIST DESTROYED');
+
+      $('<p></p>')
+        .text("I'm Sorry there Used to be a Bad List Here.")
+        .appendTo('aside');
+      console.log('Paragraph Added');
 
     });
 </script>
