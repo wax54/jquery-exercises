@@ -1,13 +1,23 @@
-class Movie {
-    constructor(title, rating) {
-        this.title = title;
-        this.rating = rating;
-    }
-}
 
 let currSortProp;
 let movieList = [];
 
+//initial Code
+$('#user-input').on('submit', function (e) {
+    e.preventDefault();
+    handleSubmit();
+});
+$('#movie-table').on('click', '.delete', function () {
+    const tr = $(this).parent();
+    const title = tr.children('.title').text();
+    removeFromMovieList(title)
+
+    $(this).parent().remove();
+});
+
+$('#sortables').on('click', 'th', changeSort);
+
+//functions
 function handleSubmit() {
     const title = $('#title').val();
     const rating = +$('#rating').val();
@@ -38,6 +48,22 @@ function updateHTMLTable() {
         addAsRow(movie);
     }
 }
+
+function addAsRow(rowItems) {
+    const tr = $('<tr>');
+    for ([key, data] of Object.entries(rowItems)) {
+        //append each key as the td's class, 
+        //  and the element as the text of te td
+        const td = $('<td>')
+        td.addClass(key);
+        td.text(data)
+        tr.append(td);
+    }
+    //append a delete button to the end of the row
+    $('<button>').addClass('delete').text('X').appendTo(tr);
+    $('#movie-table').append(tr);
+}
+
 function movieExists(testTitle) {
     const exists = movieList.findIndex(({ title }) => (
         title.toLowerCase() === testTitle.toLowerCase()
@@ -45,6 +71,7 @@ function movieExists(testTitle) {
     if (exists === -1) return false;
     else return true;
 }
+
 function changeSort(evt) {
     const sortProp = evt.target.dataset.sort;
 
@@ -70,42 +97,23 @@ function sortBy(key) {
         movieList.sort((a, b) => a[key] - b[key]);
     }
 }
+
 function reverseSort() {
     movieList.reverse();
 }
-function addAsRow(rowItems) {
-    const tr = $('<tr>');
-    for ([key, data] of Object.entries(rowItems)) {
-        //append each key as the td's class, 
-        //  and the element as the text of te td
-        const td = $('<td>')
-        td.addClass(key);
-        td.text(data)
-        tr.append(td);
-    }
-    //append a delete button to the end of the row
-    $('<button>').addClass('delete').text('X').appendTo(tr);
-    $('#movie-table').append(tr);
+
+function removeFromMovieList(title) {
+    movieList = movieList.filter(({ title: movieTitle }) => movieTitle !== title);
 }
 
 function inputError(msg) {
     alert(msg);
 }
-function removeFromMovieList(title) {
-    movieList = movieList.filter(({ title: movieTitle }) => movieTitle !== title);
+
+
+class Movie {
+    constructor(title, rating) {
+        this.title = title;
+        this.rating = rating;
+    }
 }
-
-//initial Code
-$('#user-input').on('submit', function (e) {
-    e.preventDefault();
-    handleSubmit();
-})
-$('#movie-table').on('click', '.delete', function () {
-    const tr = $(this).parent();
-    const title = tr.children('.title').text();
-    removeFromMovieList(title)
-
-    $(this).parent().remove();
-});
-
-$('#sortables').on('click', 'th', changeSort)
