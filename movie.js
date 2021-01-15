@@ -22,10 +22,7 @@ function handleSubmit() {
         return
     }
     //movie already exists in the list
-    const exists = movieList.findIndex((movie) => (
-        movie.title.toLowerCase() === title.toLowerCase()
-    ));
-    if (exists != -1) {
+    if (movieExists(title)) {
         inputError('Movie Title Already Exists!');
         return
     }
@@ -41,7 +38,13 @@ function updateHTMLTable() {
         addAsRow(movie);
     }
 }
-
+function movieExists(testTitle) {
+    const exists = movieList.findIndex(({ title }) => (
+        title.toLowerCase() === testTitle.toLowerCase()
+    ));
+    if (exists === -1) return false;
+    else return true;
+}
 function changeSort(evt) {
     const sortProp = evt.target.dataset.sort;
 
