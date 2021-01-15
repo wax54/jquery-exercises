@@ -17,11 +17,12 @@
         <input type="submit">
     </form>
 
-    <table id="movie-table">
-        <thead>
-            <th id="title-head">Title</th>
-            <th id="rating-head">Rating</th>
+    <table>
+        <thead id="sortables">
+            <th data-sort="title" id="title-head">Title</th>
+            <th data-sort="rating" id="rating-head">Rating</th>
         </thead>
+        <tbody id="movie-table"></tbody>
     </table>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

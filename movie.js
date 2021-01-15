@@ -1,10 +1,11 @@
-$('#user-input').on('submit', function (e) {
-    e.preventDefault();
-    handleSubmit();
-})
-$('#movie-table').on('click', '.delete', function () {
-    $(this).parent().remove();
-});
+class Movie {
+    constructor(title, rating) {
+        this.title = title;
+        this.rating = rating;
+    }
+}
+
+const movieList = [];
 
 function handleSubmit() {
     const title = $('#title').val();
@@ -19,11 +20,31 @@ function handleSubmit() {
         return
     }
 
-    const listItems = {
-        title,
-        rating
+    const movie = new Movie(title, rating);
+
+    movieList.push(movie);
+    updateHTMLTable();
+}
+
+function updateHTMLTable() {
+    $('#movie-table').text('');
+    for (movie of movieList) {
+        addAsRow(movie);
     }
-    addAsRow(listItems);
+}
+
+function changeSort(evt) {
+    const sortProp = evt.target.dataset.sort;
+    if (sortProp = 'rating') {
+        sortByRating();
+        return
+    }
+    if (sortProp = 'title') {
+        sortByTitle();
+        return;
+    } else {
+        throw new Error('Unknown sort Property ' + sortProp + ' in ' + evt.target);
+    }
 
 }
 
@@ -41,16 +62,18 @@ function addAsRow(rowItems) {
     $('<button>').addClass('delete').text('X').appendTo(tr);
     $('#movie-table').append(tr);
 }
-function addToRow(tr, td) {
-    const delButton = $('<button class="delete">')
-        .text('X');
 
-    const li = $(`<>`)
-        .text(str + ' ')
-        .append(delButton);
-
-    $('ul').append(li);
-}
 function inputError(msg) {
     alert(msg);
 }
+
+//initial Code
+$('#user-input').on('submit', function (e) {
+    e.preventDefault();
+    handleSubmit();
+})
+$('#movie-table').on('click', '.delete', function () {
+    $(this).parent().remove();
+});
+
+$('#sortables').on('click', 'th', changeSort)
